@@ -35,8 +35,8 @@ commander
                             .replace(/-/g, options.secondaryChar); // replace with slack chars
                         row += letter;
                     }
-                    var previewRow = row.replace(new RegExp(options.primaryChar, "g"), "\\u" + emoticons[options.primaryChar])
-                        .replace(new RegExp(options.secondaryChar, "g"), "\\u" + emoticons[options.secondaryChar]);
+                    var previewRow = row.replace(new RegExp(options.primaryChar, "g"), "\\u" + emoticons[options.primaryChar] + " ")
+                        .replace(new RegExp(options.secondaryChar, "g"), "\\u" + emoticons[options.secondaryChar] + " ");
                     console.log(eval("'" + previewRow + "'"));
                 }
             } catch (err) {
