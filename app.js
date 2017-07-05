@@ -1,6 +1,7 @@
 const alpha = require('./alpha.json');
 const package = require('./package');
 const commander = require('commander');
+const chalk = require('chalk');
 
 
 // SETUP
@@ -17,10 +18,28 @@ commander
         var row;
         var letter;
         words.forEach(function (word) {
+            word = word.replace(/[^a-zA-Z]+/g,"").toUpperCase();
+
+            console.log("\n", chalk.red(word), "\n");
+
+            // command line version
             for (var i = 0; i < 7; i++) {
                 row = "";
                 for (var j = 0; j < word.length; j++) {
-                    var letter = alpha[word[j].toUpperCase()][i];
+                    var letter = alpha[word[j]][i];
+                    if (j > 0) letter = letter.substring(1); // compress letters
+                    row += letter;
+                }
+                console.log(row);
+            }
+
+            console.log();
+
+            // translated version
+            for (var i = 0; i < 7; i++) {
+                row = "";
+                for (var j = 0; j < word.length; j++) {
+                    var letter = alpha[word[j]][i];
                     if (j > 0) letter = letter.substring(1); // compress letters
                     letter = letter.replace(/#/g, options.primaryChar)
                         .replace(/-/g, options.secondaryChar); // replace with slack chars
@@ -28,7 +47,9 @@ commander
                 }
                 console.log(row);
             }
+
         });
+        console.log();
     });
 
 
